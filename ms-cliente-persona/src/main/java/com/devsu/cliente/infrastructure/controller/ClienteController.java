@@ -17,10 +17,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/")
+@Tag(name = "Clientes", description = "Endpoints para la gestión integral de clientes, incluyendo su creación, consulta, actualización y eliminación.")
 public class ClienteController {
 
 	private final ClienteUseCase clienteUseCase;

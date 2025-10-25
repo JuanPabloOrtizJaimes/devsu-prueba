@@ -22,9 +22,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/")
+@Tag(name = "Cuentas", description = "Gestión de cuentas de usuario, incluyendo su creación, consulta y actualización.")
 public class CuentaController {
 
 	private final CuentaUseCase cuentaUseCase;

@@ -26,6 +26,7 @@ public class CuentaMapper {
                 cuenta.getNumeroCuenta(),
                 cuenta.getTipoCuenta(),
                 cuenta.getSaldoInicial(),
+                cuenta.getSaldoActual(),
                 cuenta.getEstado(),
                 cuenta.getClienteId(),
                 cuenta.getCliente() != null ? cuenta.getCliente().getNombre() : null

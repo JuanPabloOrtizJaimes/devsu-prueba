@@ -12,14 +12,21 @@ public class CuentaResponse {
 	private Long clienteId;
 	private String nombreCliente;
 
-	public CuentaResponse(Long id, String numeroCuenta, String tipoCuenta, BigDecimal saldoInicial, Boolean estado, Long clienteId, String nombreCliente) {
+	private BigDecimal saldoActual;
+
+	public CuentaResponse(Long id, String numeroCuenta, String tipoCuenta, BigDecimal saldoInicial, BigDecimal saldoActual, Boolean estado, Long clienteId, String nombreCliente) {
 		this.id = id;
 		this.numeroCuenta = numeroCuenta;
 		this.tipoCuenta = tipoCuenta;
 		this.saldoInicial = saldoInicial;
+		this.saldoActual = saldoActual;
 		this.estado = estado;
 		this.clienteId = clienteId;
 		this.nombreCliente = nombreCliente;
+	}
+
+	public BigDecimal getSaldoActual() {
+		return saldoActual;
 	}
 
 	public Long getId() {
