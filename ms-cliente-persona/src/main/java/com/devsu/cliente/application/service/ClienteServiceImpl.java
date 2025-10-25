@@ -90,7 +90,7 @@ public class ClienteServiceImpl implements ClienteUseCase {
 		if (!persistencePort.existsById(id)) {
 			throw new ClienteNotFoundException("Cliente no encontrado con ID: " + id);
 		}
-		// Capture client ID before deletion
+		
 		eventPublisher.publishClientDeletedEvent(new ClientEvent<>("client-deleted", java.time.LocalDateTime.now(), "ClientDeleted", "ms-cliente-persona", new ClientDeletedData(id)));
 		persistencePort.deleteById(id);
 	}
