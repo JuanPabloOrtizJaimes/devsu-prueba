@@ -1,90 +1,102 @@
 package com.devsu.cliente.application.service;
 
+
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.devsu.cliente.application.dto.ClienteRequest;
 import com.devsu.cliente.application.dto.ClienteResponse;
-import com.devsu.cliente.infrastructure.persistence.entity.ClienteEntity;
-import com.devsu.cliente.infrastructure.persistence.repository.ClienteRepository;
-import com.devsu.cliente.shared.ApiResponse;
+import com.devsu.cliente.application.event.ClientData;
+import com.devsu.cliente.application.event.ClientDeletedData;
+import com.devsu.cliente.application.event.ClientEvent;
+import com.devsu.cliente.application.event.RabbitMQEventPublisher;
+import com.devsu.cliente.application.port.in.ClienteUseCase;
+import com.devsu.cliente.application.port.out.ClientePersistencePort;
+import com.devsu.cliente.domain.model.Cliente;
+import com.devsu.cliente.infrastructure.exception.BusinessException;
+import com.devsu.cliente.infrastructure.exception.ClienteNotFoundException;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClienteServiceImpl implements ClienteUseCase {
 
-	private final ClienteRepository repository;
+	private final ClientePersistencePort persistencePort;
+	private final RabbitMQEventPublisher eventPublisher;
 
-	public ClienteServiceImpl(ClienteRepository repository) {
-		this.repository = repository;
+	public ClienteServiceImpl(ClientePersistencePort persistencePort, RabbitMQEventPublisher eventPublisher) {
+		this.persistencePort = persistencePort;
+		this.eventPublisher = eventPublisher;
 	}
 
 	@Override
 	public ClienteResponse guardar(ClienteRequest request) {
-		ClienteEntity cliente = new ClienteEntity(request.getNombre(), request.getGenero(), request.getEdad(),
+		if (persistencePort.findByIdentificacion(request.getIdentificacion()).isPresent()) {
+			throw new BusinessException("Ya existe un cliente con la identificación " + request.getIdentificacion());
+		}
+
+		Cliente cliente = new Cliente(request.getNombre(), request.getGenero(), request.getEdad(),
 				request.getIdentificacion(), request.getDireccion(), request.getTelefono(), null,
 				request.getContrasena(), request.isEstado());
 
-		ClienteEntity nuevo = repository.save(cliente);
-		ClienteResponse response = new ClienteResponse(nuevo.getId(), nuevo.getNombre(), nuevo.getGenero(),
-				nuevo.getEdad(), nuevo.getIdentificacion(), nuevo.getDireccion(), nuevo.getTelefono(),
-				nuevo.isEstado());
-		return response;
+		Cliente nuevo = persistencePort.save(cliente);
+		eventPublisher.publishClientCreatedEvent(new ClientEvent<>("client-created", java.time.LocalDateTime.now(), "ClientCreated", "ms-cliente-persona", new ClientData(nuevo.getId(), nuevo.getNombre())));
+
+		return toResponse(nuevo);
 	}
 
 	@Override
 	public List<ClienteResponse> obtenerTodos() {
-
-		List<ClienteResponse> lista = repository.findAll().stream()
-				.map(c -> new ClienteResponse(c.getId(), c.getNombre(), c.getGenero(), c.getEdad(),
-						c.getIdentificacion(), c.getDireccion(), c.getTelefono(), c.isEstado()))
-				.collect(Collectors.toList());
-		return lista;
+		return persistencePort.findAll().stream().map(this::toResponse).collect(Collectors.toList());
 	}
 
 	@Override
-	public ResponseEntity<ApiResponse<ClienteResponse>> obtenerPorId(Long id) {
+	public ClienteResponse obtenerPorId(Long id) {
+		Cliente cliente = persistencePort.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException("Cliente no encontrado con ID: " + id));
 
-		ResponseEntity<ApiResponse<ClienteResponse>> clienteObtenido = repository.findById(id)
-				.map(c -> ResponseEntity.ok(new ApiResponse<>("Cliente encontrado",
-						new ClienteResponse(c.getId(), c.getNombre(), c.getGenero(), c.getEdad(), c.getIdentificacion(),
-								c.getDireccion(), c.getTelefono(), c.isEstado()))))
-				.orElse(ResponseEntity.status(404).body(new ApiResponse<>("Cliente no encontrado", null)));
-		return clienteObtenido;
+		return toResponse(cliente);
 	}
 
 	@Override
-	public ResponseEntity<ApiResponse<ClienteResponse>> actualizar(Long id, ClienteRequest request) {
-		Optional<ClienteEntity> clienteActualizado = repository.findById(id).map(c -> {
-			c.setNombre(request.getNombre());
-			c.setGenero(request.getGenero());
-			c.setEdad(request.getEdad());
-			c.setIdentificacion(request.getIdentificacion());
-			c.setDireccion(request.getDireccion());
-			c.setTelefono(request.getTelefono());
-			c.setContrasena(request.getContrasena());
-			c.setEstado(request.isEstado());
-			return repository.save(c);
-		});
-		ResponseEntity<ApiResponse<ClienteResponse>> clienteActualizadoResponse = clienteActualizado
-				.map(c -> ResponseEntity.ok(new ApiResponse<>("Cliente actualizado correctamente",
-						new ClienteResponse(c.getId(), c.getNombre(), c.getGenero(), c.getEdad(), c.getIdentificacion(),
-								c.getDireccion(), c.getTelefono(), c.isEstado()))))
-				.orElse(ResponseEntity.status(404).body(new ApiResponse<>("Cliente no encontrado", null)));
-		return clienteActualizadoResponse;
-	}
+	public ClienteResponse actualizar(Long id, ClienteRequest request) {
+		Cliente cliente = persistencePort.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException("Cliente no encontrado con ID: " + id));
 
-	@Override
-	public  ResponseEntity<ApiResponse<Void>> eliminar(Long id) {
-		if (repository.existsById(id)) {
-			repository.deleteById(id);
-			return ResponseEntity.ok(new ApiResponse<>("Cliente eliminado correctamente", null));
+		if (!cliente.getIdentificacion().equals(request.getIdentificacion())) {
+			persistencePort.findByIdentificacion(request.getIdentificacion()).ifPresent(existing -> {
+				throw new BusinessException(
+						"Ya existe un cliente con la identificación " + request.getIdentificacion());
+			});
 		}
-		return ResponseEntity.status(404).body(new ApiResponse<>("Cliente no encontrado", null));
-		
-		
+
+		cliente.setNombre(request.getNombre());
+		cliente.setGenero(request.getGenero());
+		cliente.setEdad(request.getEdad());
+		cliente.setIdentificacion(request.getIdentificacion());
+		cliente.setDireccion(request.getDireccion());
+		cliente.setTelefono(request.getTelefono());
+		cliente.setContrasena(request.getContrasena());
+		cliente.setEstado(request.isEstado());
+
+		Cliente actualizado = persistencePort.save(cliente);
+		eventPublisher.publishClientUpdatedEvent(new ClientEvent<>("client-updated", java.time.LocalDateTime.now(), "ClientUpdated", "ms-cliente-persona", new ClientData(actualizado.getId(), actualizado.getNombre())));
+
+		return toResponse(actualizado);
+	}
+
+	@Override
+	public void eliminar(Long id) {
+		if (!persistencePort.existsById(id)) {
+			throw new ClienteNotFoundException("Cliente no encontrado con ID: " + id);
+		}
+		// Capture client ID before deletion
+		eventPublisher.publishClientDeletedEvent(new ClientEvent<>("client-deleted", java.time.LocalDateTime.now(), "ClientDeleted", "ms-cliente-persona", new ClientDeletedData(id)));
+		persistencePort.deleteById(id);
+	}
+
+	private ClienteResponse toResponse(Cliente cliente) {
+		return new ClienteResponse(cliente.getId(), cliente.getNombre(), cliente.getGenero(), cliente.getEdad(),
+				cliente.getIdentificacion(), cliente.getDireccion(), cliente.getTelefono(), cliente.isEstado());
 	}
 }

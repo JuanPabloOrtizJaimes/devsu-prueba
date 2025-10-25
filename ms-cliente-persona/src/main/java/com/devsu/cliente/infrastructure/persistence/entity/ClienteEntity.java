@@ -5,9 +5,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "clientes", uniqueConstraints = { @UniqueConstraint(columnNames = "identificacion") })
 public class ClienteEntity extends PersonaEntity {
 
 	@Id

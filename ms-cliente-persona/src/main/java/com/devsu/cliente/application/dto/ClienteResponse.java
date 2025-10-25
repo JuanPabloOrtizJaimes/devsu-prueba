@@ -23,7 +23,6 @@ public class ClienteResponse {
 		this.estado = estado;
 	}
 
-	// Getters
 	public Long getId() {
 		return id;
 	}
