@@ -44,7 +44,7 @@ public class MovimientoEntity {
 		this.cuenta = cuenta;
 	}
 
-	// Getters y setters
+	
 	public Long getId() {
 		return id;
 	}

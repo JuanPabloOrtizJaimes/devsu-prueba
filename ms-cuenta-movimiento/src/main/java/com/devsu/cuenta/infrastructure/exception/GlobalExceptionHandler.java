@@ -1,15 +1,15 @@
 package com.devsu.cuenta.infrastructure.exception;
 
-import com.devsu.cuenta.shared.ApiResponse;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.stream.Collectors;
+import com.devsu.cuenta.shared.ApiResponse;
 
 @RestControllerAdvice(basePackages = "com.devsu.cuenta.infrastructure.controller")
 public class GlobalExceptionHandler {

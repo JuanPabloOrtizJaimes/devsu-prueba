@@ -25,9 +25,7 @@ public class Cuenta {
         this.estado = estado;
         this.clienteId = clienteId;
         this.cliente = cliente;
-    }
-
-    // Getters y Setters
+    }    
 
     public BigDecimal getSaldoActual() {
         return saldoActual;

@@ -53,7 +53,7 @@ public class MovimientoServiceImpl implements MovimientoUseCase {
         movimiento.setCuenta(cuenta);
 
         cuenta.setSaldoActual(nuevoSaldoMovimiento); 
-        cuentaPersistencePort.save(cuenta); // 
+        cuentaPersistencePort.save(cuenta);
 
         return movimientoPersistencePort.save(movimiento);
     }

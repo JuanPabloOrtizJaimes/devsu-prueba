@@ -25,9 +25,7 @@ public class ClientEventService {
         clientePersistencePort.save(cliente);
     }
 
-    public void handleClientDeletedEvent(ClientDeletedData clientDeletedData) {
-        // In a real scenario, you might want to mark the client as inactive
-        // or handle associated accounts. For simplicity, we'll just delete.
+    public void handleClientDeletedEvent(ClientDeletedData clientDeletedData) {        
         clientePersistencePort.findById(clientDeletedData.getClientId())
                 .ifPresent(cliente -> clientePersistencePort.deleteById(cliente.getId()));
     }
