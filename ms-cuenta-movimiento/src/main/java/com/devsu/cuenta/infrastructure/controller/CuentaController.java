@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devsu.cuenta.application.dto.CuentaRequest;
 import com.devsu.cuenta.application.dto.CuentaResponse;
 import com.devsu.cuenta.application.port.in.CuentaUseCase;
+import com.devsu.cuenta.shared.ApiResponse; // Import ApiResponse
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -37,55 +38,65 @@ public class CuentaController {
 
 	@Operation(summary = "Crear una nueva cuenta", description = "Crea una nueva cuenta en el sistema para un cliente existente.")
 	@ApiResponses(value = {
-			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Cuenta creada exitosamente"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Cuenta creada exitosamente",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = ApiResponse.class))),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos de entrada inválidos"),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Cliente no encontrado")
 	})
 	@PostMapping
-	public ResponseEntity<CuentaResponse> crearCuenta(
+	public ResponseEntity<ApiResponse<CuentaResponse>> crearCuenta(
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos de la cuenta para crear", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = CuentaRequest.class), examples = @ExampleObject(value = "{\"numeroCuenta\": \"478758\", \"tipoCuenta\": \"Ahorro\", \"saldoInicial\": 2000.00, \"estado\": true, \"clienteId\": 1}")))
 			@RequestBody CuentaRequest request) {
 		CuentaResponse response = cuentaUseCase.crearCuenta(request);
-		return new ResponseEntity<>(response, HttpStatus.CREATED);
+		return new ResponseEntity<>(new ApiResponse<>("Cuenta creada exitosamente", response), HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Listar todas las cuentas", description = "Devuelve una lista de todas las cuentas registradas en el sistema.")
 	@ApiResponses(value = {
-			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Lista de cuentas obtenida exitosamente")
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Lista de cuentas obtenida exitosamente",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = ApiResponse.class)))
 	})
 	@GetMapping
-	public ResponseEntity<List<CuentaResponse>> listarCuentas() {
+	public ResponseEntity<ApiResponse<List<CuentaResponse>>> listarCuentas() {
 		List<CuentaResponse> responses = cuentaUseCase.listarCuentas();
-		return ResponseEntity.ok(responses);
+		return ResponseEntity.ok(new ApiResponse<>("Lista de cuentas obtenida exitosamente", responses));
 	}
 
 	@Operation(summary = "Obtener una cuenta por ID", description = "Busca y devuelve una cuenta específica basada en su ID.")
 	@ApiResponses(value = {
-			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cuenta encontrada"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cuenta encontrada",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = ApiResponse.class))),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
 	})
 	@GetMapping("/{id}")
-	public ResponseEntity<CuentaResponse> obtenerCuentaPorId(
+	public ResponseEntity<ApiResponse<CuentaResponse>> obtenerCuentaPorId(
 			@Parameter(description = "ID de la cuenta a buscar", required = true, example = "1")
 			@PathVariable Long id) {
 		CuentaResponse response = cuentaUseCase.obtenerCuentaPorId(id);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(new ApiResponse<>("Cuenta encontrada", response));
 	}
 
 	@Operation(summary = "Actualizar una cuenta", description = "Actualiza los datos de una cuenta existente basado en su ID.")
 	@ApiResponses(value = {
-			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cuenta actualizada correctamente"),
+			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cuenta actualizada correctamente",
+					content = @Content(mediaType = "application/json",
+							schema = @Schema(implementation = ApiResponse.class))),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Datos de entrada inválidos"),
 			@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
 	})
 	@PutMapping("/{id}")
-	public ResponseEntity<CuentaResponse> actualizarCuenta(
+	public ResponseEntity<ApiResponse<CuentaResponse>> actualizarCuenta(
 			@Parameter(description = "ID de la cuenta a actualizar", required = true, example = "1")
 			@PathVariable Long id,
 			@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos de la cuenta para actualizar", required = true, content = @Content(mediaType = "application/json", schema = @Schema(implementation = CuentaRequest.class), examples = @ExampleObject(value = "{\"numeroCuenta\": \"478758\", \"tipoCuenta\": \"Ahorro\", \"saldoInicial\": 2000.00, \"estado\": true, \"clienteId\": 1}")))
 			@RequestBody CuentaRequest request) {
 		CuentaResponse response = cuentaUseCase.actualizarCuenta(id, request);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(new ApiResponse<>("Cuenta actualizada correctamente", response));
 	}
 
 }
+
+

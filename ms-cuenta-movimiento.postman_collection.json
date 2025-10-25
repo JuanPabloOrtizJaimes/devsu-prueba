@@ -1,0 +1,1206 @@
+{
+	"info": {
+		"_postman_id": "86138b3a-ced0-4a78-b2f2-2b00e3cab297",
+		"name": "ms-cuenta-movimiento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49452307",
+		"_collection_link": "https://juanpablooj-9729670.postman.co/workspace/JUAN-PABLO-ORTIZ-JAIMES's-Works~c1826a41-5eaf-46c4-8492-46bbe73d0a4b/collection/49452307-86138b3a-ced0-4a78-b2f2-2b00e3cab297?action=share&source=collection_link&creator=49452307"
+	},
+	"item": [
+		{
+			"name": "movimientos",
+			"item": [
+				{
+					"name": "Listar todos los movimientos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						},
+						"description": "Devuelve una lista de todos los movimientos registrados en el sistema."
+					},
+					"response": [
+						{
+							"name": "Lista de movimientos obtenida exitosamente",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/movimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1758,\n    \"fecha\": \"2017-09-19\",\n    \"tipoMovimiento\": \"string\",\n    \"valor\": 8857.32007845867,\n    \"saldo\": 8479.104671326822,\n    \"numeroCuenta\": \"string\"\n  },\n  {\n    \"id\": 4681,\n    \"fecha\": \"1976-02-03\",\n    \"tipoMovimiento\": \"string\",\n    \"valor\": 9060.892436294947,\n    \"saldo\": 7535.847669992215,\n    \"numeroCuenta\": \"string\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Crear un nuevo movimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoMovimiento\": \"credito\",\n  \"valor\": 100,\n  \"cuentaId\": 1\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movimientos"
+							]
+						},
+						"description": "Registra un nuevo movimiento (crédito o débito) en una cuenta específica."
+					},
+					"response": [
+						{
+							"name": "Movimiento creado exitosamente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipoMovimiento\": \"credito\",\n  \"valor\": 100,\n  \"cuentaId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/movimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						},
+						{
+							"name": "Datos de entrada inválidos o saldo no disponible",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipoMovimiento\": \"credito\",\n  \"valor\": 100,\n  \"cuentaId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/movimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						},
+						{
+							"name": "Cuenta no encontrada",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"tipoMovimiento\": \"credito\",\n  \"valor\": 100,\n  \"cuentaId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/movimientos",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Anular un movimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/movimientos/:id/anulacion",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movimientos",
+								":id",
+								"anulacion"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del movimiento a anular"
+								}
+							]
+						},
+						"description": "Anula un movimiento existente creando un movimiento inverso para mantener la trazabilidad."
+					},
+					"response": [
+						{
+							"name": "Movimiento anulado exitosamente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/movimientos/:id/anulacion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos",
+										":id",
+										"anulacion"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						},
+						{
+							"name": "Movimiento no encontrado para anular",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/movimientos/:id/anulacion",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos",
+										":id",
+										"anulacion"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener un movimiento por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/movimientos/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"movimientos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del movimiento a buscar"
+								}
+							]
+						},
+						"description": "Busca y devuelve un movimiento específico basado en su ID."
+					},
+					"response": [
+						{
+							"name": "Movimiento encontrado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/movimientos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						},
+						{
+							"name": "Movimiento no encontrado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/movimientos/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"movimientos",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 736,\n  \"fecha\": \"1984-07-10\",\n  \"tipoMovimiento\": \"string\",\n  \"valor\": 557.606253820031,\n  \"saldo\": 5633.72249276834,\n  \"numeroCuenta\": \"string\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cuentas",
+			"item": [
+				{
+					"name": "Listar todas las cuentas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Devuelve una lista de todas las cuentas registradas en el sistema."
+					},
+					"response": [
+						{
+							"name": "Lista de cuentas obtenida exitosamente",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 211,\n    \"numeroCuenta\": \"string\",\n    \"tipoCuenta\": \"string\",\n    \"saldoInicial\": 9520.895290708557,\n    \"estado\": false,\n    \"clienteId\": 7771,\n    \"nombreCliente\": \"string\",\n    \"saldoActual\": 8981.623961019695\n  },\n  {\n    \"id\": 4440,\n    \"numeroCuenta\": \"string\",\n    \"tipoCuenta\": \"string\",\n    \"saldoInicial\": 7683.33688304569,\n    \"estado\": false,\n    \"clienteId\": 1786,\n    \"nombreCliente\": \"string\",\n    \"saldoActual\": 2893.7263436542657\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Crear una nueva cuenta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Crea una nueva cuenta en el sistema para un cliente existente."
+					},
+					"response": [
+						{
+							"name": "Cuenta creada exitosamente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						},
+						{
+							"name": "Datos de entrada inválidos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						},
+						{
+							"name": "Cliente no encontrado",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						}
+					]
+				},
+				{
+					"name": "Obtener una cuenta por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID de la cuenta a buscar"
+								}
+							]
+						},
+						"description": "Busca y devuelve una cuenta específica basada en su ID."
+					},
+					"response": [
+						{
+							"name": "Cuenta encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						},
+						{
+							"name": "Cuenta no encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar una cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID de la cuenta a actualizar"
+								}
+							]
+						},
+						"description": "Actualiza los datos de una cuenta existente basado en su ID."
+					},
+					"response": [
+						{
+							"name": "Cuenta actualizada correctamente",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						},
+						{
+							"name": "Datos de entrada inválidos",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						},
+						{
+							"name": "Cuenta no encontrada",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"Ahorro\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 2416,\n  \"numeroCuenta\": \"string\",\n  \"tipoCuenta\": \"string\",\n  \"saldoInicial\": 6143.513626397781,\n  \"estado\": false,\n  \"clienteId\": 4300,\n  \"nombreCliente\": \"string\",\n  \"saldoActual\": 9759.85544898194\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "reportes",
+			"item": [
+				{
+					"name": "Generar reporte de estado de cuenta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/reportes?fechaInicio=2023-01-01&fechaFin=2023-01-31&clienteId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reportes"
+							],
+							"query": [
+								{
+									"key": "fechaInicio",
+									"value": "2023-01-01",
+									"description": "Fecha de inicio del reporte (YYYY-MM-DD)"
+								},
+								{
+									"key": "fechaFin",
+									"value": "2023-01-31",
+									"description": "Fecha de fin del reporte (YYYY-MM-DD)"
+								},
+								{
+									"key": "clienteId",
+									"value": "1",
+									"description": "ID del cliente para el reporte"
+								}
+							]
+						},
+						"description": "Genera un reporte detallado del estado de cuenta de un cliente en un rango de fechas específico."
+					},
+					"response": [
+						{
+							"name": "Reporte generado exitosamente",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reportes?fechaInicio=2023-01-01&fechaFin=2023-01-31&clienteId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reportes"
+									],
+									"query": [
+										{
+											"key": "fechaInicio",
+											"value": "2023-01-01",
+											"description": "Fecha de inicio del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "fechaFin",
+											"value": "2023-01-31",
+											"description": "Fecha de fin del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "clienteId",
+											"value": "1",
+											"description": "ID del cliente para el reporte"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"clienteId\": 358,\n  \"clienteNombre\": \"string\",\n  \"cuentas\": [\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 8582.117716068678,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"2009-08-07\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 4683.263301149501,\n          \"saldo\": 7989.806133302007\n        },\n        {\n          \"fecha\": \"1978-02-04\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 6669.715204695352,\n          \"saldo\": 2361.179970574583\n        }\n      ]\n    },\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 2617.385219424475,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"1986-01-06\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 2290.7251876693513,\n          \"saldo\": 5556.758453300598\n        },\n        {\n          \"fecha\": \"1992-06-26\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 7900.029774233195,\n          \"saldo\": 1921.7471182975698\n        }\n      ]\n    }\n  ]\n}"
+						},
+						{
+							"name": "Parámetros de entrada inválidos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reportes?fechaInicio=2023-01-01&fechaFin=2023-01-31&clienteId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reportes"
+									],
+									"query": [
+										{
+											"key": "fechaInicio",
+											"value": "2023-01-01",
+											"description": "Fecha de inicio del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "fechaFin",
+											"value": "2023-01-31",
+											"description": "Fecha de fin del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "clienteId",
+											"value": "1",
+											"description": "ID del cliente para el reporte"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"clienteId\": 358,\n  \"clienteNombre\": \"string\",\n  \"cuentas\": [\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 8582.117716068678,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"2009-08-07\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 4683.263301149501,\n          \"saldo\": 7989.806133302007\n        },\n        {\n          \"fecha\": \"1978-02-04\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 6669.715204695352,\n          \"saldo\": 2361.179970574583\n        }\n      ]\n    },\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 2617.385219424475,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"1986-01-06\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 2290.7251876693513,\n          \"saldo\": 5556.758453300598\n        },\n        {\n          \"fecha\": \"1992-06-26\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 7900.029774233195,\n          \"saldo\": 1921.7471182975698\n        }\n      ]\n    }\n  ]\n}"
+						},
+						{
+							"name": "Cliente no encontrado o sin movimientos en el rango de fechas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reportes?fechaInicio=2023-01-01&fechaFin=2023-01-31&clienteId=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reportes"
+									],
+									"query": [
+										{
+											"key": "fechaInicio",
+											"value": "2023-01-01",
+											"description": "Fecha de inicio del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "fechaFin",
+											"value": "2023-01-31",
+											"description": "Fecha de fin del reporte (YYYY-MM-DD)"
+										},
+										{
+											"key": "clienteId",
+											"value": "1",
+											"description": "ID del cliente para el reporte"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"clienteId\": 358,\n  \"clienteNombre\": \"string\",\n  \"cuentas\": [\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 8582.117716068678,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"2009-08-07\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 4683.263301149501,\n          \"saldo\": 7989.806133302007\n        },\n        {\n          \"fecha\": \"1978-02-04\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 6669.715204695352,\n          \"saldo\": 2361.179970574583\n        }\n      ]\n    },\n    {\n      \"numeroCuenta\": \"string\",\n      \"tipoCuenta\": \"string\",\n      \"saldoInicial\": 2617.385219424475,\n      \"estado\": true,\n      \"movimientos\": [\n        {\n          \"fecha\": \"1986-01-06\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 2290.7251876693513,\n          \"saldo\": 5556.758453300598\n        },\n        {\n          \"fecha\": \"1992-06-26\",\n          \"tipoMovimiento\": \"string\",\n          \"valor\": 7900.029774233195,\n          \"saldo\": 1921.7471182975698\n        }\n      ]\n    }\n  ]\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081/api/cuentas/v1"
+		}
+	]
+}

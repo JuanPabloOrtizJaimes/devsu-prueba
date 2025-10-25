@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "14d25e00-a36c-48ff-b791-2dab2138088e",
+		"name": "ms-cliente-persona",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49452307",
+		"_collection_link": "https://juanpablooj-9729670.postman.co/workspace/JUAN-PABLO-ORTIZ-JAIMES's-Works~c1826a41-5eaf-46c4-8492-46bbe73d0a4b/collection/49452307-14d25e00-a36c-48ff-b791-2dab2138088e?action=share&source=collection_link&creator=49452307"
+	},
+	"item": [
+		{
+			"name": "clientes",
+			"item": [
+				{
+					"name": "Obtener un cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del cliente a buscar"
+								}
+							]
+						},
+						"description": "Busca y devuelve un cliente específico basado en su ID."
+					},
+					"response": [
+						{
+							"name": "Cliente encontrado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						},
+						{
+							"name": "Cliente no encontrado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar un cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del cliente a actualizar"
+								}
+							]
+						},
+						"description": "Actualiza los datos de un cliente existente basado en su ID."
+					},
+					"response": [
+						{
+							"name": "Cliente actualizado correctamente",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						},
+						{
+							"name": "Datos de entrada inválidos",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						},
+						{
+							"name": "Cliente no encontrado",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar un cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID del cliente a eliminar"
+								}
+							]
+						},
+						"description": "Elimina un cliente del sistema basado en su ID."
+					},
+					"response": [
+						{
+							"name": "Cliente eliminado correctamente",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {},\n  \"timestamp\": \"2020-06-01T09:09:23.375Z\"\n}"
+						},
+						{
+							"name": "Cliente no encontrado",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {},\n  \"timestamp\": \"2020-06-01T09:09:23.375Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Listar todos los clientes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Devuelve una lista de todos los clientes registrados en el sistema."
+					},
+					"response": [
+						{
+							"name": "Lista de clientes obtenida exitosamente",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": [\n    {\n      \"id\": 1105,\n      \"nombre\": \"string\",\n      \"genero\": \"string\",\n      \"edad\": 489,\n      \"identificacion\": \"string\",\n      \"direccion\": \"string\",\n      \"telefono\": \"string\",\n      \"estado\": true\n    },\n    {\n      \"id\": 31,\n      \"nombre\": \"string\",\n      \"genero\": \"string\",\n      \"edad\": 4141,\n      \"identificacion\": \"string\",\n      \"direccion\": \"string\",\n      \"telefono\": \"string\",\n      \"estado\": true\n    }\n  ],\n  \"timestamp\": \"1967-08-31T16:50:11.440Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Crear un nuevo cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Crea un nuevo cliente en el sistema y lo persiste en la base de datos."
+					},
+					"response": [
+						{
+							"name": "Cliente creado exitosamente",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						},
+						{
+							"name": "Datos de entrada inválidos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1234567890\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"0987654321\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "*/*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"mensaje\": \"string\",\n  \"data\": {\n    \"id\": 3835,\n    \"nombre\": \"string\",\n    \"genero\": \"string\",\n    \"edad\": 2212,\n    \"identificacion\": \"string\",\n    \"direccion\": \"string\",\n    \"telefono\": \"string\",\n    \"estado\": false\n  },\n  \"timestamp\": \"1966-10-08T16:00:35.434Z\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api/clientes/v1"
+		}
+	]
+}
